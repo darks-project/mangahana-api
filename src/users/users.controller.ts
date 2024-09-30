@@ -1,9 +1,6 @@
-import { Body, Controller, Get,  HttpCode,  HttpException, HttpStatus, Param, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get,  HttpCode,  HttpException, HttpStatus, Param, ParseIntPipe, Post, Query, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { ConfirmPhoneDTO, CreateUserDTO, JoinDTO, LoginDTO } from './dto/users.dto';
-import { AuthGuard } from 'common/guards/auth.guard';
-import { UserData } from 'common/decorators/user.decorator';
-import { User } from './interfaces/users.interface';
 
 @Controller('users')
 export class UsersController {
@@ -48,7 +45,7 @@ export class UsersController {
   }
 
   @Get('/isPhoneExists')
-  async isPhoneExists(@Query('phone') phone: string) {
+  async isPhoneExists(@Query('phone', ParseIntPipe) phone: string) {
     try {
       return await this.service.isPhoneExists(phone);
     } catch (e) {
@@ -58,7 +55,7 @@ export class UsersController {
 
   @Get()
   //@UseGuards(AuthGuard)
-  async getMe(@Query('id') userId: number) {
+  async getMe(@Query('id', ParseIntPipe) userId: number) {
     try {
       return await this.service.getUserByID(userId);
     } catch (e) {
