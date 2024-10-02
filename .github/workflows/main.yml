@@ -1,0 +1,23 @@
+name: Pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@2
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with: 
+          ssh-private-key: ${{ secrets.MH-1-PRIVATE-KEY }}
+
+      - name: Remove old container
+        run: |
+          ssh github-action-user@server "docker stop api-container && docker rm api-container"
