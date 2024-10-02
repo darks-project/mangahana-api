@@ -16,12 +16,12 @@ jobs:
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
         with: 
-          ssh-private-key: ${{ env.SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Copy files via SCP
         run: |
-          scp -r ./dist github-action-user@${{ env.SERVER_IP }}:/github-action-user/home/api
+          scp -r ./dist github-action-user@${{ secrets.SERVER_IP }}:/github-action-user/home/api
 
       - name: Remove old container
         run: |
-          ssh github-action-user@${{ env.SERVER_IP }} "docker stop api-container && docker rm api-container"
+          ssh github-action-user@${{ secrets.SERVER_IP }} "docker stop api-container && docker rm api-container"
