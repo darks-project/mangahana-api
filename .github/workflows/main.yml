@@ -20,7 +20,7 @@ jobs:
 
       - name: Copy files via SCP
         run: |
-          scp -r ./dist github-action-user@${{ secrets.SERVER_IP }}:/home/github-action-user/api
+          scp -r -o StrictHostKeyChecking=no ./dist github-action-user@${{ secrets.SERVER_IP }}:/home/github-action-user/api
 
       - name: Remove old container
         run: |
