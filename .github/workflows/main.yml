@@ -11,13 +11,17 @@ jobs:
     
     steps:
       - name: Checkout Code
-        uses: actions/checkout@2
+        uses: actions/checkout@v3
 
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
         with: 
           ssh-private-key: ${{ secrets.MH-1-PRIVATE-KEY }}
 
+      - name: Copy files via SCP
+        run: |
+          scp -r ./dist github-action-user@${{ secrets.MH-1-IP }}:/github-action-user/home/api
+
       - name: Remove old container
         run: |
-          ssh github-action-user@server "docker stop api-container && docker rm api-container"
+          ssh github-action-user@${{ secrets.MH-1-IP }} "docker stop api-container && docker rm api-container"
