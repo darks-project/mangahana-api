@@ -32,7 +32,7 @@ jobs:
 
       - name: Build container
         run: |
-          ssh github-action-user@${{ secrets.SERVER_IP }} "docker build -t api ."
+          ssh github-action-user@${{ secrets.SERVER_IP }} "docker build -t api ./api"
 
       - name: Run container
         run: |
