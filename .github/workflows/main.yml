@@ -24,7 +24,7 @@ jobs:
 
       - name: Remove old container
         run: |
-          ssh github-action-user@${{ secrets.SERVER_IP }} "docker stop api && docker rm api"
+          ssh github-action-user@${{ secrets.SERVER_IP }} "docker rm -f api"
       
       - name: Remove old image
         run: |
