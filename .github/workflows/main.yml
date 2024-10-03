@@ -36,4 +36,4 @@ jobs:
 
       - name: Run container
         run: |
-          ssh github-action-user@${{ secrets.SERVER_IP }} "docker run -n api -d --network=host --restart=always -it api"
+          ssh github-action-user@${{ secrets.SERVER_IP }} "docker run --name api -d --network=host --restart=always -it api"
