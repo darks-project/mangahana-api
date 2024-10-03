@@ -3,10 +3,10 @@ import { PoolClient } from 'pg';
 import { PG_CONNECTION } from 'common/constraints/constraints';
 
 import { SMS } from 'common/sms/sms.service';
-import { ConfirmPhoneDTO, CreateUserDTO, LoginDTO } from './dto/users.dto';
+import { ConfirmPhoneDTO, CreateUserDTO, LoginDTO } from './dto';
 
 @Injectable()
-export class UsersService {
+export class AuthorizationService {
   constructor(@Inject(PG_CONNECTION) private db: PoolClient, private sms: SMS) {}
 
   async join(phone: string) {
