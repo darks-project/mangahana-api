@@ -28,7 +28,7 @@ jobs:
       
       - name: Remove old image
         run: |
-          ssh github-action-user@${{ secrets.SERVER_IP }} "docker image rm api"
+          ssh github-action-user@${{ secrets.SERVER_IP }} "docker image rm -f api"
 
       - name: Build container
         run: |
