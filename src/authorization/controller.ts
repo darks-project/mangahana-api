@@ -47,7 +47,12 @@ export class AuthorizationController {
   @Get('/isPhoneExists')
   async isPhoneExists(@Query('phone', ParseIntPipe) phone: string) {
     try {
-      return await this.service.isPhoneExists(phone);
+      const isExists = await this.service.isPhoneExists(phone);
+      if (isExists) {
+        return true;
+      } else {
+        throw new Error('false');
+      }
     } catch (e) {
       throw new HttpException(e.toString(), HttpStatus.BAD_REQUEST);
     }
